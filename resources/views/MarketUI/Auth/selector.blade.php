@@ -40,55 +40,32 @@
 
         }
 
-        .form-control {
-            display: block;
+        /* Custom Start */
+        #customer-select {
+            padding-top: 2.5rem;
+            padding-bottom: 2.5rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
 
-
-        /* form-input CSS -Start */
-
-        .form-input {
-            width: 100%;
-            border-width: 2px;
+        .section {
+            padding-bottom: 2rem;
         }
 
-        .form-input:active {
-            border-color: #22C55E;
+        .desc {
+            width: 8.75rem;
+            text-align: justify;
         }
 
-        .form-input:hover {
-            border-color: #22C55E;
+        .desc-right {
+            text-align: right;
         }
 
-        .form-input::selection {
-            border-color: #22C55E;
+        .title-right {
+            text-align: right;
         }
 
-        /* form-input CSS - End */
-        #submit_btn {
-            width: 100%;
-            color: #F0FDF4;
-            background: #22C55E;
-            border: none;
-            margin-top: 45px;
-        }
-
-        #submit_btn:hover {
-            background: #15803D;
-        }
-
-        #buat_disini {
-            padding-top: 1.5rem;
-        }
-
-        #link_disini {
-            color: #22C55E;
-            font-weight: bold;
-        }
-
-        #link_disini:hover {
-            color: #15803D;
-        }
+        /* Custom End */
     </style>
 </head>
 
@@ -109,34 +86,45 @@
                             d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
                     </svg>
                 </a>
-                <h1 class="flex-initial w-32 font-semibold text-xl mx-auto text-gray-700 py-2">Login Menu</h1>
+                <h1 class="flex-initial w-64 font-semibold text-xl mx-auto ms-10 text-gray-700 py-2">Register Menu</h1>
             </div>
             <hr class="hr-auth">
             {{-- Bagian Header Atas - End --}}
-            {{-- Bagian Form - Start --}}
-            <form class="form_action px-8" action="" method="POST">
-                @csrf
-                <div class="form-control pt-6">
-                    <h5 class="py-2 text-sm text-gray-700 font-medium">Username</h5>
-                    <input type="text"
-                        class="form-input @error('username') is-invalid @enderror border-gray-300 rounded-lg bg-gray-200 text-gray-700 text-sm "
-                        name="username" id="username" placeholder="" value="">
+            {{-- Bagian Pilihan Customer - Start --}}
+            <div class="flex flex-col" id="customer-select">
+                <div class="section flex flex-row">
+                    <div class="flex-1">
+                        <a class="select_btn" href="#">
+                            <img src="{{ asset('assets/img/customer_btn.svg') }}" alt="">
+                        </a>
+                    </div>
+                    <div class="flex-1 py-6 px-4">
+                        <div class="justify-start">
+                            <h2 class="font-semibold text-base text-gray-700">Customer</h2>
+                            <p class="desc text-xs text-gray-500">Dengan akun customer, anda dapat membeli
+                                barang dari
+                                tenant.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-control pt-2">
-                    <h5 class="py-2 text-sm text-gray-700 font-medium">Password</h5>
-                    <input type="password"
-                        class="form-input @error('password') is-invalid @enderror border-gray-300 rounded-lg bg-gray-200 text-gray-700 text-sm "
-                        name="password" id="password" placeholder="" value="">
+                <div class="section flex flex-row">
+                    <div class="flex-1 py-6 px-4">
+                        <div class="justify-start">
+                            <h2 class="title-right font-semibold text-base text-gray-700">Tenant</h2>
+                            <p class="desc desc-right text-xs text-gray-500">
+                                Dengan akun Tenant, anda dapat menjual barang-barang.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="justify-start">
+                            <a class="select_btn" href="#">
+                                <img src="{{ asset('assets/img/tenant_btn.svg') }}" alt="">
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <button id="submit_btn" type="submit" class="btn">Login</button>
-                <p id="buat_disini" class="text-sm text-center text-gray-700">Tidak memiliki akun? <a id="link_disini"
-                        href="#">Buat Disini</a>
-                </p>
-
-            </form>
-            {{-- Bagian Form - End --}}
-
-
+            </div>
         </div>
     </div>
 

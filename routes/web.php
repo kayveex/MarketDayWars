@@ -20,6 +20,12 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('MarketUI.Auth.login');
 });
+Route::get('/selector', function () {
+    return view('MarketUI.Auth.selector');
+});
+Route::get('/cust-regis', function () {
+    return view('MarketUI.Auth.cust_regis');
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
