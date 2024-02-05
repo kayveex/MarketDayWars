@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustRegController;
 use App\Http\Controllers\MainDashController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
@@ -33,6 +34,10 @@ Route::middleware(['guest'])->group(function() {
     Route::get('/', function () {
         return view('index');
     });
+
+    // Register As Customer
+    Route::get('/cust-regis',[CustRegController::class,'index'])->name('cust-regis');
+    Route::post('/cust-regis/post',[CustRegController::class,'store'])->name('post-cust-regis');
     
 });
 
@@ -51,25 +56,14 @@ Route::fallback(function () {
     return view('404');
 });
 
-Route::get('/cust-regis', function () {
-    return view('Auth.cust_regis');
-});
-
 Route::get('/tn-regis', function () {
     return view('Auth.tenant_regis');
-});
-
-Route::get('/dash', function () {
-    return view('Partials.Dashboard.master');
 });
 
 Route::get('/403', function () {
     return view('403');
 });
 
-// Route::get('/confirm', function () {
-//     return view('Auth.persetujuan');
-// });
 
 
 

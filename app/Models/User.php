@@ -46,4 +46,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // One to One dengan tabel customers
+    public function profilCustomer() {
+        return $this->hasOne(Customers::class,'cust_uid','id');
+    }
 }

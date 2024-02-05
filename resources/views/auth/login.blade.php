@@ -105,7 +105,7 @@
         <div id="auth-section" class="rounded-lg  bg-gray-100">
             {{-- Bagian Header Atas - Start --}}
             <div id="top-header" class="flex justify-start px-8 py-2">
-                <a class="pt-2" href="#">
+                <a class="pt-2" href="/">
                     <svg class="back_btn" xmlns="http://www.w3.org/2000/svg" height="24" width="21"
                         viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                         <path fill="#374151"

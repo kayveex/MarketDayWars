@@ -110,7 +110,7 @@
                         Login
                     </a>
                     <a class=" py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg bg-yellow-300 text-gray-800 shadow-sm hover:bg-yellow-400 disabled:opacity-50 disabled:pointer-events-none"
-                        href="#">
+                        href="/select">
                         Register
                     </a>
                 </div>
