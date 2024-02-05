@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Warspreneur - Registrasi Customer</title>
-    {{-- TailwindCSS --}}
-    @vite('resources/css/app.css')
-    {{-- Font Awesome 5 --}}
-    <script src="https://kit.fontawesome.com/1568b4f3ba.js" crossorigin="anonymous"></script>
+    {{-- Tailwind CSS & Preline --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- Font is using Remix Icon, with NPM are included --}}
+
+    {{-- Inline CSS - Start --}}
     <style>
         #background-auth {
             background: linear-gradient(180deg, #1D232A 32.29%, #1C362F 70.48%, #1A613A 106.84%, rgba(22, 163, 74, 0.39) 161.91%) !important;
@@ -49,7 +50,7 @@
 
         .form-input {
             width: 100%;
-            border-width: 2px;
+            border-width: 3px;
         }
 
         .form-input:active {
@@ -93,22 +94,13 @@
         }
 
         /* Tabs - Start */
+        .form_section {
+            margin-top: -0.75rem;
+        }
+
         .tab {
-            font-size: 14px;
-            color: #374151;
-        }
-
-        .tabpanel-content {
-            display: block;
-            opacity: 1;
-        }
-
-        .tab-panel {
-            display: none;
-        }
-
-        .tab-panel.active {
-            display: block;
+            text-decoration: underline 2px;
+            text-underline-offset: 4px;
         }
 
         .left,
@@ -123,7 +115,28 @@
         .form-select {
             width: 100%;
         }
+
+        .custom-file-upload {
+            /* Border color equivalent to bg-green-500 */
+            color: #fff;
+            /* Text color */
+            background-color: #22C55E;
+            /* bg-green-500 equivalent color */
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .custom-file-upload input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
     </style>
+    {{-- Inline CSS - End --}}
 </head>
 
 <body id="background-auth" class="font-wars">
@@ -132,9 +145,12 @@
         <img src="{{ asset('assets/img/logo-auth.png') }}" alt="">
     </div>
     {{-- Logo Warspreneur - End --}}
-    <div class="flex items-center justify-center">
-        <div id="auth-section" class="rounded-lg  bg-gray-100">
-            {{-- Bagian Header Atas - Start --}}
+
+
+    {{-- Form Content - Start --}}
+    <section class="flex items-center justify-center">
+        <div id="auth-section" class="rounded-lg bg-gray-100">
+            {{-- Top Header - Start --}}
             <div id="top-header" class="flex justify-start px-8 py-2">
                 <a class="pt-2" href="#">
                     <svg class="back_btn" xmlns="http://www.w3.org/2000/svg" height="24" width="21"
@@ -147,17 +163,30 @@
                 </h1>
             </div>
             <hr class="hr-auth">
-            <form class="form_action px-8" action="" method="POST">
-                @csrf
-                {{-- Percobaan terakhir --}}
-                <div role="tablist" class="tabs tabs-sm tabs-bordered font-semibold py-4">
-                    <a id="tab1" role="tab" class="tab cursor-pointer tab-active">Tahap Awal</a>
-                    <a id="tab2" role="tab" class="tab cursor-pointer">Tahap Akhir</a>
+            {{-- Top Header - End --}}
+
+            <form action="" method="post" class="form_action px-8">
+                <div class=" border-gray-700">
+                    <nav class="flex space-x-2" aria-label="Tabs" role="tablist">
+                        <button type="button"
+                            class="underline tab font-semibold hs-tab-active:font-semibold hs-tab-active:border-gray-700 hs-tab-active:text-gray-700 py-2 px-1 inline-flex items-center gap-x-2 text-md whitespace-nowrap text-gray-400 hover:text-gray-700 focus:outline-none  disabled:opacity-50 disabled:pointer-events-none active"
+                            id="tabs-with-underline-item-1" data-hs-tab="#tabs-with-underline-1"
+                            aria-controls="tabs-with-underline-1" role="tab">
+                            Tahap Awal
+                        </button>
+                        <button type="button"
+                            class="underline tab font-semibold hs-tab-active:font-semibold hs-tab-active:border-gray-700 hs-tab-active:text-gray-700 py-4 px-1 inline-flex items-center gap-x-2  text-md whitespace-nowrap text-gray-400 hover:text-gray-700 focus:outline-none  disabled:opacity-50 disabled:pointer-events-none"
+                            id="tabs-with-underline-item-2" data-hs-tab="#tabs-with-underline-2"
+                            aria-controls="tabs-with-underline-2" role="tab">
+                            Tahap Akhir
+                        </button>
+                    </nav>
                 </div>
 
-                <div class="tab-content p-4">
-                    <!-- Tahap 1 -->
-                    <div id="tabpanel1" class="tab-panel active px-2">
+                <div class="form_section">
+                    {{-- Tahap Awal - Start --}}
+                    <div id="tabs-with-underline-1" role="tabpanel" aria-labelledby="tabs-with-underline-item-1"
+                        class="tabpanel">
                         <div class="form-control">
                             <h5 class="py-2 text-sm text-gray-700 font-medium">Username</h5>
                             <input type="text"
@@ -185,20 +214,20 @@
                                     name="ulangi_pass" id="ulangi_pass" autocomplete="off">
                             </div>
                         </div>
+
                         <div class="form-control pt-2">
                             <h5 class="py-2 text-sm text-gray-700 font-medium">Upload Foto Profil</h5>
-                            {{-- <input type="file"
-                                class="form-input @error('foto') is-invalid @enderror border-gray-300 rounded-lg bg-gray-200 text-gray-700 text-sm file-input-xs"
-                                name="foto" id="foto" accept="image/*"> --}}
-                            <input type="file" name="foto" id="foto" accept="image/*"
-                                class="file-input text-gray-700 text-sm file-input-bordered file-input-sm w-full max-w-xs @error('foto') is-invalid @enderror">
+                            <label class="custom-file-upload"> Klik Disini
+                                <input type="file" name="foto" id="foto" accept="image/*" class="file-input">
+                            </label>
                         </div>
 
                     </div>
+                    {{-- Tahap Awal - End --}}
 
-                    <!-- Tahap 2 -->
-                    <div id="tabpanel2" class="hidden tab-panel px-2">
-                        <!-- Konten tahap 2 -->
+                    {{-- Tahap Akhir - Start --}}
+                    <div id="tabs-with-underline-2" class="hidden" role="tabpanel" class="tabpanel"
+                        aria-labelledby="tabs-with-underline-item-2">
                         <div class="form-control ">
                             <h5 class="py-2 text-sm text-gray-700 font-medium">Nama Lengkap</h5>
                             <input type="text"
@@ -230,41 +259,18 @@
                             </div>
 
                         </div>
-                        <button id="submit_btn" type="submit" class="btn">Register</button>
+                        <button id="submit_btn" type="submit"
+                            class="py-3 px-4 gap-x-2 text-md font-semibold rounded-lg border border-transparent  text-white">Register
+                        </button>
                     </div>
+                    {{-- Tahap Akhir - End --}}
                 </div>
             </form>
-            {{-- Bagian Form - End --}}
         </div>
-    </div>
-    {{-- Javascripts - Start --}}
-    <script>
-        // Percobaan Terakhir
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabs = document.querySelectorAll('.tab');
-            const tabPanels = document.querySelectorAll('.tab-panel');
 
-            tabs.forEach((tab, index) => {
-                tab.addEventListener('click', () => {
-                    // Remove 'tab-active' class from all tabs
-                    tabs.forEach(t => {
-                        t.classList.remove('tab-active');
-                    });
+    </section>
+    {{-- Form Content - End --}}
 
-                    // Remove 'active' class from all tab panels
-                    tabPanels.forEach(panel => {
-                        panel.classList.remove('active');
-                    });
-
-                    // Add 'tab-active' class to the clicked tab
-                    tab.classList.add('tab-active');
-
-                    // Add 'active' class to the corresponding tab panel
-                    tabPanels[index].classList.add('active');
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>

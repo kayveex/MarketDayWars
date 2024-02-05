@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\MainDashController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,27 +17,62 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('MarketUI.index');
+
+// Guestmode -> Yg Akses hanya yg belum login
+Route::middleware(['guest'])->group(function() {
+    // Selector Section
+    Route::get('/select',[SessionController::class,'select'])->name('select');
+
+
+    // Login Section
+    Route::get('/login',[SessionController::class, 'index'])->name('login');
+    Route::get('/confirm',[SessionController::class, 'confirm'])->name('confirm');
+    Route::post('/login',[SessionController::class,'login']);
+
+    // Landing page
+    Route::get('/', function () {
+        return view('index');
+    });
+    
 });
-Route::get('/login', function () {
-    return view('MarketUI.Auth.login');
+
+
+// Route wajib login
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('/dashboard',[MainDashController::class,'index']);
+
+    Route::get('/logout', [SessionController::class,'logout']);
+
 });
-Route::get('/selector', function () {
-    return view('MarketUI.Auth.selector');
+
+// Route Error 404 - Berfungsi jika memasukkan route ngawur
+Route::fallback(function () {
+    return view('404');
 });
+
 Route::get('/cust-regis', function () {
-    return view('MarketUI.Auth.cust_regis');
+    return view('Auth.cust_regis');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/tn-regis', function () {
+    return view('Auth.tenant_regis');
+});
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::get('/dash', function () {
+    return view('Partials.Dashboard.master');
+});
+
+Route::get('/403', function () {
+    return view('403');
+});
+
+// Route::get('/confirm', function () {
+//     return view('Auth.persetujuan');
 // });
 
-// require __DIR__.'/auth.php';
+
+
+
+
+

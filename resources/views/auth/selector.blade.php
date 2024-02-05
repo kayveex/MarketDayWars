@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Warspreneur - Login</title>
-    {{-- TailwindCSS --}}
-    @vite('resources/css/app.css')
-    {{-- Font Awesome 5 --}}
-    <script src="https://kit.fontawesome.com/1568b4f3ba.js" crossorigin="anonymous"></script>
+    <title>Warspreneur - Pilihan Registrasi</title>
+    {{-- Tailwind CSS & Preline --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- Font is using Remix Icon, with NPM are included --}}
+
+    {{-- Inline CSS - Start --}}
     <style>
         #background-auth {
             background: linear-gradient(180deg, #1D232A 32.29%, #1C362F 70.48%, #1A613A 106.84%, rgba(22, 163, 74, 0.39) 161.91%) !important;
@@ -67,6 +68,7 @@
 
         /* Custom End */
     </style>
+    {{-- Inline CSS - End --}}
 </head>
 
 <body id="background-auth" class="font-wars">
