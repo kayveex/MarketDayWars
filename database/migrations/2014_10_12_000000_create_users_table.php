@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('username', 45);
             $table->string('password');
             $table->string('ulangi_pass');
-            $table->string('email')->unique();
+            // Deleting unique() for using the same email for each account
+            $table->string('email');
             $table->enum('role', ['customer','tenant', 'admin'])->default('customer');
             $table->string('foto')->nullable();
             $table->boolean('isActive')->default(0);

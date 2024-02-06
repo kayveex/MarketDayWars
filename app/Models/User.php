@@ -47,8 +47,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // One to One dengan tabel customers
+    // One to One with Customers Table
     public function profilCustomer() {
         return $this->hasOne(Customers::class,'cust_uid','id');
+    }
+    // One to One with Tenants Table
+    public function profilTenant() {
+        return $this->hasOne(Tenants::class,'tenant_uid','id');
     }
 }

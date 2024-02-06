@@ -12,7 +12,7 @@ class Customers extends Model
     protected $table = 'customers';
     protected $primaryKey = 'cust_id';
     protected $fillable = [
-        'id_cust',
+        'cust_id',
         'nama_cust',
         'no_induk',
         'no_wa',

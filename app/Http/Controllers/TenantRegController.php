@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customers;
-use App\Models\Kelas;
+use App\Models\Tenants;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class CustRegController extends Controller
+class TenantRegController extends Controller
 {
     /**
-     * Display a registration form for customers
+     * Display a listing of the resource.
      */
     public function index()
     {
-        // Import Model from Kelas
-        $kelas = Kelas::all();
-
-        return view('Auth.cust_regis', compact('kelas'));
+        
+        
+        return view('Auth.tenant_regis');
     }
 
     /**
@@ -25,20 +23,17 @@ class CustRegController extends Controller
      */
     public function store(Request $request)
     {
-        //Validate data
         $request->validate([
-            // Validation from User Model
+            // Validation for User Model
             'username' => 'required',
             'password' => 'required|min:6|max:16',
             'ulangi_pass' => 'required|min:6|max:16',
             'email' => 'required',
             // Validation of foto isn't mandatory
             'foto' => 'sometimes|max:5120',
-            // Validation from Customers model
-            'nama_cust' => 'required|max:45',
-            'no_induk' => 'required',
-            'no_wa' => 'required|max:20',
-            'cust_kelas_id' => 'required'
+            // Validation for Tenant Model
+            'nama_tenant' => 'required',
+            'deskripsi' => 'required',
         ]);
 
         // Saving User::Data
@@ -47,31 +42,29 @@ class CustRegController extends Controller
             'password' => $request->input('password'),
             'ulangi_pass' => $request->input('ulangi_pass'),
             'email' => $request->input('email'),
-            'role' => 'customer',
+            'role' => 'tenant',
             'isActive' => 0 ,
         ];
+
         // Checking is there any image to upload
         if ($request->hasFile('foto')) {
             $fotoAcc = $request->file('foto');
             $imageNameAcc = time() . '.' . $fotoAcc->extension(); // Taking file extension
-            $fotoAcc->move(public_path('FotoCust'), $imageNameAcc); // Saving file
-            $user['foto'] = 'FotoCust/' . $imageNameAcc; // Saving the path into user data
+            $fotoAcc->move(public_path('FotoTenant'), $imageNameAcc); // Saving file
+            $user['foto'] = 'FotoTenant/' . $imageNameAcc; // Saving the path into user data
         }
-
         // Creating New Data on User Table
         $userInstance = User::create($user);
 
-        // Saving Customer::Data
-        $cust = Customers::create([
-            'nama_cust' => $request->input('nama_cust'),
-            'no_induk' => $request->input('no_induk'),
-            'no_wa' => $request->input('no_wa'),
-            'cust_kelas_id' => $request->input('cust_kelas_id'),
-            // Getting UID From User table
-            'cust_uid' => $userInstance->id,
+        $tenant = Tenants::create([
+            'nama_tenant' => $request->input('nama_tenant'),
+            'deskripsi' => $request->input('deskripsi'),
             // Set deposit_cust to 0 as default
-            'deposit_cust' => 0,
+            'deposit_tenant' => 0,
+            // Getting UID From User table
+            'tenant_uid' => $userInstance->id,
         ]);
+
         // Redirect to Confirmation Page
         return redirect('confirm');
     }

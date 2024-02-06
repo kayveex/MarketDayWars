@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Warspreneur - 404 Not Found</title>
+    <title>Warspreneur - Konfirmasi</title>
     {{-- Tailwind CSS & Preline --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- Font is using Remix Icon, with NPM are included --}}

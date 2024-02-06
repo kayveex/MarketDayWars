@@ -154,7 +154,7 @@
         <div id="auth-section" class="rounded-lg bg-gray-100">
             {{-- Top Header - Start --}}
             <div id="top-header" class="flex justify-start px-8 py-2">
-                <a class="pt-2" href="#">
+                <a class="pt-2" href="/select">
                     <svg class="back_btn" xmlns="http://www.w3.org/2000/svg" height="24" width="21"
                         viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                         <path fill="#374151"
@@ -167,7 +167,8 @@
             <hr class="hr-auth">
             {{-- Top Header - End --}}
 
-            <form action="" method="post" class="form_action px-8">
+            <form action="/tenant-regis/post" method="post" class="form_action px-8" enctype="multipart/form-data">
+                @csrf
                 <div class=" border-gray-700">
                     <nav class="flex space-x-2" aria-label="Tabs" role="tablist">
                         <button type="button"
@@ -220,7 +221,7 @@
                         <div class="form-control pt-2">
                             <h5 class="py-2 text-sm text-gray-700 font-medium">Upload Foto Profil</h5>
                             <label class="custom-file-upload"> Klik Disini
-                                <input type="file" name="foto" id="foto" accept="image/*" class="file-input">
+                                <input type="file" name="foto" id="foto" class="file-input">
                             </label>
                         </div>
 

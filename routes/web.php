@@ -4,6 +4,7 @@ use App\Http\Controllers\CustRegController;
 use App\Http\Controllers\MainDashController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TenantRegController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,7 @@ Route::middleware(['guest'])->group(function() {
     // Login Section
     Route::get('/login',[SessionController::class, 'index'])->name('login');
     Route::get('/confirm',[SessionController::class, 'confirm'])->name('confirm');
-    Route::post('/login',[SessionController::class,'login']);
+    Route::post('/login',[SessionController::class,'login'])->name('login');
 
     // Landing page
     Route::get('/', function () {
@@ -38,6 +39,10 @@ Route::middleware(['guest'])->group(function() {
     // Register As Customer
     Route::get('/cust-regis',[CustRegController::class,'index'])->name('cust-regis');
     Route::post('/cust-regis/post',[CustRegController::class,'store'])->name('post-cust-regis');
+
+    // Register As Tenant
+    Route::get('/tenant-regis',[TenantRegController::class,'index'])->name('tenant-regis');
+    Route::post('/tenant-regis/post',[TenantRegController::class, 'store'])->name('post-tenant-regis');
     
 });
 

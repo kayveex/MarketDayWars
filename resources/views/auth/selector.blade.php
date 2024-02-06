@@ -120,7 +120,7 @@
                     </div>
                     <div class="flex-1">
                         <div class="justify-start">
-                            <a class="select_btn" href="#">
+                            <a class="select_btn" href="/tenant-regis">
                                 <img src="{{ asset('assets/img/tenant_btn.svg') }}" alt="">
                             </a>
                         </div>
