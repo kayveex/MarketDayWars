@@ -94,12 +94,57 @@
 </head>
 
 <body id="background-auth" class="font-wars">
+    {{-- Alert Error  --}}
+    @if ($errors->any())
+        <div id="dismiss-alert"
+            class="bg-red-100 bg-opacity-5 mx-4 mt-4 hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300 border border-red-600 text-sm text-red-600 rounded-lg p-4"
+            role="alert">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="flex-shrink-0 h-4 w-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="m15 9-6 6" />
+                        <path d="m9 9 6 6" />
+                    </svg>
+                </div>
+                <div class="ms-2">
+                    <div class="text-sm font-medium">
+                        Peringatan!
+                    </div>
+                    <ul class="list-disc space-y-1 ps-5">
+                        @foreach ($errors->all() as $item)
+                            <li>
+                                {{ $item }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="ps-3 ms-auto">
+                    <div class="-mx-1.5 -my-1.5">
+                        <button type="button"
+                            class="inline-flex  rounded-lg p-1.5 text-red-600 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-50 focus:ring-red-600 dark:bg-transparent "
+                            data-hs-remove-element="#dismiss-alert">
+                            <span class="sr-only">Dismiss</span>
+                            <svg class="flex-shrink-0 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18" />
+                                <path d="m6 6 12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     {{-- Logo Warspreneur - Start --}}
     <div id="logo-auth" class="flex justify-center items-center">
         <img src="{{ asset('assets/img/logo-auth.png') }}" alt="">
     </div>
     {{-- Logo Warspreneur - End --}}
-
     {{-- Form Content - Start --}}
     <div class="flex items-center justify-center">
         <div id="auth-section" class="rounded-lg  bg-gray-100">
@@ -114,7 +159,7 @@
                 </a>
                 <h1 class="flex-initial w-32 font-semibold text-xl mx-auto text-gray-700 py-2">Login Menu</h1>
             </div>
-            <hr class="hr-auth">
+            <hr class="hr-auth mb-2">
             {{-- Bagian Header Atas - End --}}
             {{-- Bagian Form - Start --}}
             <form class="form_action px-8" action="/login" method="POST">

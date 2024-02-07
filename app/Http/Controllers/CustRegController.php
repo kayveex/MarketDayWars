@@ -72,8 +72,12 @@ class CustRegController extends Controller
             // Set deposit_cust to 0 as default
             'deposit_cust' => 0,
         ]);
-        // Redirect to Confirmation Page
-        return redirect('confirm');
+        // Redirect to Confirmation Page if all is complete
+        if (!$userInstance && !$cust) {
+            return redirect('cust-regis')->withErrors('Tolong Lengkapi Form Registrasi Customernya!');
+        }else {
+            return redirect('confirm');
+        }
     }
 
     /**

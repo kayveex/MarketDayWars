@@ -65,8 +65,12 @@ class TenantRegController extends Controller
             'tenant_uid' => $userInstance->id,
         ]);
 
-        // Redirect to Confirmation Page
-        return redirect('confirm');
+        // Redirect to Confirmation Page if all is complete
+        if (!$userInstance && !$tenant) {
+            return redirect('tenant-regis')->withErrors('Tolong Lengkapi Form Registrasi Tenant-nya!');
+        }else {
+            return redirect('confirm');
+        }
     }
 
     /**

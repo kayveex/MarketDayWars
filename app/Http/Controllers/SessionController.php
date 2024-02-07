@@ -28,18 +28,6 @@ class SessionController extends Controller
             'password.required' => "Password tidak boleh kosong"
         ]);
 
-        // Regular Login System
-        // $info_login = [
-        //     'username' => $request->username,
-        //     'password' => $request->password
-        // ];
-
-        // if (Auth::attempt($info_login, true)) {
-        //     return redirect('dashboard');
-        // }else {
-        //     return redirect('login')->withErrors('Username dan password yang dimasukkan tidak valid!')->withInput();
-        // }
-
         // Advanced Ver - With isActive logic
 
         $credentials = $request->only('username', 'password');
