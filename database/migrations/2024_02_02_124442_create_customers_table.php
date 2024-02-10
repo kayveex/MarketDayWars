@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('nama_cust', 45);
             $table->integer('no_induk');
             $table->string('no_wa', 20)->nullable();
-            $table->bigInteger('deposit_cust')->default(0)->nullable();
             // Foreign Key - Start
             $table->unsignedBigInteger('cust_uid');
             $table->foreign('cust_uid')->references('id')->on('users');

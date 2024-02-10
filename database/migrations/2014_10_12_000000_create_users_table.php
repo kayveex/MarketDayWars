@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('role', ['customer','tenant', 'admin'])->default('customer');
             $table->string('foto')->nullable();
             $table->boolean('isActive')->default(0);
+            $table->bigInteger('balance')->default(0)->nullable();
 
             // Default Atributes
             $table->timestamp('email_verified_at')->nullable();

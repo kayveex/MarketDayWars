@@ -49,6 +49,7 @@ class CustRegController extends Controller
             'email' => $request->input('email'),
             'role' => 'customer',
             'isActive' => 0 ,
+            'balance' => 0,
         ];
         // Checking is there any image to upload
         if ($request->hasFile('foto')) {
@@ -69,8 +70,6 @@ class CustRegController extends Controller
             'cust_kelas_id' => $request->input('cust_kelas_id'),
             // Getting UID From User table
             'cust_uid' => $userInstance->id,
-            // Set deposit_cust to 0 as default
-            'deposit_cust' => 0,
         ]);
         // Redirect to Confirmation Page if all is complete
         if (!$userInstance && !$cust) {

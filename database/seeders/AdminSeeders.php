@@ -20,7 +20,8 @@ class AdminSeeders extends Seeder
                 'password' => bcrypt('001Agent'),
                 'ulangi_pass'=>'001Agent',
                 'role' => 'admin',
-                'isActive' => 1
+                'isActive' => 1,
+                'balance' => 0
             ],
             [
                 'username' => 'admin002',
@@ -28,7 +29,8 @@ class AdminSeeders extends Seeder
                 'password' => bcrypt('002Agent'),
                 'ulangi_pass'=>'002Agent',
                 'role' => 'admin',
-                'isActive' => 1
+                'isActive' => 1,
+                'balance' => 0
             ],
         ];
 

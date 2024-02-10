@@ -17,8 +17,7 @@ class Kelas extends Model
 
     // Relationship Declaration - Kelas to Customers
     public function Customers() {
-        return $this->hasMany(Customers::class,'cust_kelas_id','kelas_id');
-        
+        return $this->hasMany(Customers::class,'cust_kelas_id','kelas_id');   
     }
 
 

@@ -24,7 +24,8 @@ class User extends Authenticatable
         'ulangi_pass',
         'role',
         'foto',
-        'isActive'
+        'isActive',
+        'balance',
     ];
 
     /**
@@ -54,5 +55,15 @@ class User extends Authenticatable
     // One to One with Tenants Table
     public function profilTenant() {
         return $this->hasOne(Tenants::class,'tenant_uid','id');
+    }
+
+    // One to Many with Notifikasi Table
+    public function toNotifikasi() {
+        return $this->hasMany(Notifikasi::class,'notif_uid','id');   
+    }
+
+    // One to Many with Cashflow Table
+    public function toCashflow() {
+        return $this->hasMany(Cashflow::class,'cashflow_uid','id');   
     }
 }

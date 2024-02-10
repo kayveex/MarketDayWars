@@ -17,7 +17,6 @@ return new class extends Migration
             // Primary Key - End
             $table->string('nama_tenant', 45);
             $table->text('deskripsi');
-            $table->bigInteger('deposit_tenant')->default(0)->nullable();
             // Attributes
 
             // Foreign Key - Start

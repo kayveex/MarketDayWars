@@ -44,6 +44,7 @@ class TenantRegController extends Controller
             'email' => $request->input('email'),
             'role' => 'tenant',
             'isActive' => 0 ,
+            'balance' => 0,
         ];
 
         // Checking is there any image to upload
@@ -59,8 +60,6 @@ class TenantRegController extends Controller
         $tenant = Tenants::create([
             'nama_tenant' => $request->input('nama_tenant'),
             'deskripsi' => $request->input('deskripsi'),
-            // Set deposit_cust to 0 as default
-            'deposit_tenant' => 0,
             // Getting UID From User table
             'tenant_uid' => $userInstance->id,
         ]);
