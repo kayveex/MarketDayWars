@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id('item_id');
             $table->string('nama_item', 45);
+            $table->string('fotoItem');
             $table->bigInteger('harga');
             $table->integer('kuantitas');
             $table->text('deskripsi_item');

@@ -19,6 +19,7 @@ class Items extends Model
         'deskripsi_item',
         'item_subkategori_id',
         'item_tenant_id',
+        'fotoItem'
     ];
 
     // Foreign Key - Items to Tenants

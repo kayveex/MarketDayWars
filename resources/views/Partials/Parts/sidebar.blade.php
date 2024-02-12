@@ -3,12 +3,12 @@
 @if (Auth::user()->role == 'admin')
     <!-- start: Sidebar -->
     <div class="fixed left-0 top-0 w-64 h-full bg-green-800 p-4 z-50 sidebar-menu transition-transform">
-        <a href="#" class="flex items-center pb-4 border-b border-b-white border-opacity-15">
+        <a href="/dashboard" class="flex items-center pb-4 border-b border-b-white border-opacity-15">
             <img src="{{ asset('assets/img/dash_logo.png') }}" alt="">
         </a>
         <ul class="mt-4">
             <li class="mb-1 group active">
-                <a href="#"
+                <a href="/dashboard"
                     class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                     <i class="ri-home-2-line mr-3 text-lg"></i>
                     <span class="text-sm">Dashboard</span>
@@ -130,11 +130,141 @@
 @endif
 
 {{-- Fitur Untuk Customer --}}
-@if (Auth::user()->role == "customer")
-    
+@if (Auth::user()->role == 'customer')
+    <!-- start: Sidebar -->
+    <div class="fixed left-0 top-0 w-64 h-full bg-green-800 p-4 z-50 sidebar-menu transition-transform">
+        <a href="/dashboard" class="flex items-center pb-4 border-b border-b-white border-opacity-15">
+            <img src="{{ asset('assets/img/dash_logo.png') }}" alt="">
+        </a>
+        <ul class="mt-4">
+            <li class="mb-1 group active">
+                <a href="/dashboard"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="ri-home-2-line mr-3 text-lg"></i>
+                    <span class="text-sm">Dashboard</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
+                <a href="#"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="ri-shopping-bag-3-line mr-3 text-lg"></i>
+                    <span class="text-sm">Belanja</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
+                <a href="#"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="ri-wallet-line mr-3 text-lg"></i>
+                    <span class="text-sm">Saldo Saya</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
+                <a href="#"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="ri-truck-line mr-3 text-lg"></i>
+                    <span class="text-sm">Pesanan Saya</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
+                <a href="#"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-50 group-[.selected]:bg-opacity-15 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <i class="ri-chat-history-line mr-3 text-lg"></i>
+                    <span class="text-sm">Riwayat</span>
+                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                </a>
+                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                    <li class="mb-4">
+                        <a href="#"
+                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                            Topup
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#"
+                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                            Cashout
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#"
+                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                            Pembelian
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
+    <!-- end: Sidebar -->
 @endif
 
 {{-- Fitur Untuk Tenant --}}
-@if (Auth::user()->role == "tenant")
-    
+@if (Auth::user()->role == 'tenant')
+    <!-- start: Sidebar -->
+    <div class="fixed left-0 top-0 w-64 h-full bg-green-800 p-4 z-50 sidebar-menu transition-transform">
+        <a href="/dashboard" class="flex items-center pb-4 border-b border-b-white border-opacity-15">
+            <img src="{{ asset('assets/img/dash_logo.png') }}" alt="">
+        </a>
+        <ul class="mt-4">
+            <li class="mb-1 group active">
+                <a href="/dashboard"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="ri-home-2-line mr-3 text-lg"></i>
+                    <span class="text-sm">Dashboard</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
+                <a href="#"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="ri-shopping-bag-2-line mr-3 text-lg"></i>
+                    <span class="text-sm">Produk Saya</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
+                <a href="#"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="ri-wallet-line mr-3 text-lg"></i>
+                    <span class="text-sm">Saldo Saya</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
+                <a href="#"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="ri-send-plane-2-line mr-3 text-lg"></i>
+                    <span class="text-sm">Pesanan Masuk</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
+                <a href="#"
+                    class="flex items-center py-2 px-4 text-gray-200 hover:bg-gray-50 hover:bg-opacity-15 hover:text-gray-200 rounded-md group-[.active]:bg-gray-50 group-[.active]:bg-opacity-15 group-[.active]:text-white group-[.selected]:bg-gray-50 group-[.selected]:bg-opacity-15 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                    <i class="ri-chat-history-line mr-3 text-lg"></i>
+                    <span class="text-sm">Riwayat</span>
+                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                </a>
+                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                    <li class="mb-4">
+                        <a href="#"
+                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                            Topup
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#"
+                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                            Cashout
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#"
+                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                            Penjualan
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
+    <!-- end: Sidebar -->
 @endif
