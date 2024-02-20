@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustRegController;
 use App\Http\Controllers\MainDashController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SaldoSayaController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TenantRegController;
 use Illuminate\Support\Facades\Auth;
@@ -54,15 +55,15 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/logout', [SessionController::class,'logout']);
 
+    // Saldo Feature
+    Route::get('/saldo',[SaldoSayaController::class, 'index']);
+    Route::post('/saldo/topup',[SaldoSayaController::class, 'topup']);
+
 });
 
 // Route Error 404 - Berfungsi jika memasukkan route ngawur
 Route::fallback(function () {
     return view('404');
-});
-
-Route::get('/tn-regis', function () {
-    return view('Auth.tenant_regis');
 });
 
 Route::get('/403', function () {
