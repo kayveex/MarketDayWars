@@ -3,22 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cashflow;
+use App\Models\Customers;
+use App\Models\Notifikasi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SaldoSayaController extends Controller
 {
+    // Saldo Display for all roles!
     public function index()  {
 
-        $balance = Auth::user()->balance;
-        return view('GeneralFeatures.Saldo.index', compact( 'balance'));
+        if (Auth::user()->role == 'admin') {
+            // Getting Data for cashflow_uid from User
+            $custs = Customers::all();
+            return view('GeneralFeatures.Saldo.topup', compact('custs'));
+        }else {
+            // Taking balance data for User
+            $balance = Auth::user()->balance;
+            return view('GeneralFeatures.Saldo.index', compact( 'balance'));
+        }
     }
 
-    // Store Data from Users into DB - For Admins
+    // For Admins - Topup Feature
     public function topup(Request $request) {
         //Validate data
         $request->validate([
             'jumlah' => 'required|numeric',
+            'cashflow_uid' => 'required',
         ]);
 
         // Ambil cashflow_id terakhir dari database
@@ -42,14 +54,28 @@ class SaldoSayaController extends Controller
         // Gabungkan timestamp dengan angka terakhir yang baru
         $cashflowId = $timestamp . $newLastDigit;
 
-        // Save data
-        $myBalance = Cashflow::create([
+        // Save data - Cashflow Table
+        $addCashflow = Cashflow::create([
             'tipe' => 'topup',
             'jumlah' => $request->input('jumlah'),
             'status_cashflow' => 'disetujui',
             'cashflow_uid' => $request->input('cashflow_uid'),
             'cashflow_id' => $cashflowId,
         ]);
+
+        // Save data - Notif Table
+        $addNotif = Notifikasi::create([
+            'no_referensi' => $addCashflow->cashflow_id,
+            'status' => 'berhasil',
+            'pesan' => 'Berhasil melakukan top-up sebesar ' . $addCashflow->jumlah,
+            'isOpened' => 0,
+            'notif_uid' => $addCashflow->cashflow_uid,
+        ]);
+
+        // Update Balance Data from Users Table
+        $customer = User::find($request->input('cashflow_uid'));
+        $customer->balance += $request->input('jumlah');
+        $customer->save();
 
         return redirect('/saldo')->with('success', 'Berhasil Topup!');
         
