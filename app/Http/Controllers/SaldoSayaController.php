@@ -13,7 +13,13 @@ class SaldoSayaController extends Controller
 {
     // Saldo Display for all roles!
     public function index()  {
-
+        // For Notifications
+        $id = Auth::user()->id;
+        $notifikasi = Notifikasi::where('notif_uid', $id)
+            ->where('isOpened', 0)
+            ->latest() // Mengurutkan notifikasi berdasarkan waktu pembuatan terbaru
+            ->limit(3) // Membatasi hanya 3 notifikasi terbaru
+            ->get();
         if (Auth::user()->role == 'admin') {
             // Getting Data for cashflow_uid from User
             $custs = Customers::all();
@@ -21,7 +27,7 @@ class SaldoSayaController extends Controller
         }else {
             // Taking balance data for User
             $balance = Auth::user()->balance;
-            return view('GeneralFeatures.Saldo.index', compact( 'balance'));
+            return view('GeneralFeatures.Saldo.index', compact( 'balance','notifikasi','id'));
         }
     }
 
@@ -64,10 +70,11 @@ class SaldoSayaController extends Controller
         ]);
 
         // Save data - Notif Table
+        $jumlah_rupiah = number_format($addCashflow->jumlah, 0, ',', '.');
         $addNotif = Notifikasi::create([
             'no_referensi' => $addCashflow->cashflow_id,
             'status' => 'berhasil',
-            'pesan' => 'Berhasil melakukan top-up sebesar ' . $addCashflow->jumlah,
+            'pesan' => 'Berhasil melakukan top-up sebesar Rp ' . $jumlah_rupiah,
             'isOpened' => 0,
             'notif_uid' => $addCashflow->cashflow_uid,
         ]);
