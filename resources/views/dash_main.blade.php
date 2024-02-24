@@ -1,5 +1,5 @@
-{{-- Import Dashboard Template  --}}
-@extends('Partials.Dashboard.master')
+{{-- Template Dashboard --}}
+@extends('Partials.Dashboard.master', compact('notifikasi','id'))
 
 {{-- Breadcrumb Section --}}
 @section('breadcrumb')
