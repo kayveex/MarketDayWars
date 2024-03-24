@@ -32,15 +32,15 @@
             </button>
             <ul
                 class="dropdown-menu shadow-md shadow-black/5 z-30 hidden rounded-md bg-accdash w-full max-w-[140px] border-2 border-gray-600 ">
+                
+                @if (Auth::user()->role === 'tenant' || Auth::user()->role === 'customer')
                 <li class="flex hover:bg-green-700  ">
                     <i class="ri-user-4-line  text-gray-200 py-2 ms-4"></i>
-                    <a href="#" class="flex items-center text-[13px] py-1 px-2 text-gray-200">Profil
+                    <a href="/profile/{{ Auth::user()->id }}" class="flex items-center text-[13px] py-1 px-2 text-gray-200">Profil
                         Saya</a>
-                </li>
-                <li class="flex hover:bg-green-700">
-                    <i class="ri-settings-line text-gray-200 py-2 ms-4"></i>
-                    <a href="#" class="flex items-center text-[13px] py-1 px-2 text-gray-200">Ubah Profil</a>
-                </li>
+                </li>   
+                @endif
+
                 <li class="flex hover:bg-green-700">
                     <i class="ri-logout-box-r-line py-2 ms-4 text-red-500 "></i>
                     <a href="/logout" class="flex items-center text-[13px] py-1 px-2 text-red-500">Logout</a>

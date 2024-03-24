@@ -72,8 +72,7 @@
             <div class="bg-accdash rounded-md border-t-4 border-green-500 p-6 shadow-md shadow-black/5">
                 <div class="flex justify-between mb-6">
                     <div>
-                        <div class="text-2xl font-semibold mb-1 text-green-500">10</div>
-                        <div class="text-sm font-medium text-gray-400">Active orders</div>
+                        <div class="text-2xl font-semibold mb-1 text-green-500">Riwayat  Transaksi</div>
                     </div>
                 </div>
             </div>
