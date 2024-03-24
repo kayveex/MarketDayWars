@@ -59,6 +59,10 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/saldo',[SaldoSayaController::class, 'index']);
     Route::post('/saldo/topup',[SaldoSayaController::class, 'topup']);
 
+    // Profile Feature
+    Route::get('/profile/{id}',[ProfileController::class,'edit']);
+    Route::put('/profile/{id}/update',[ProfileController::class,'update']);
+
 });
 
 // Route Error 404 - Berfungsi jika memasukkan route ngawur

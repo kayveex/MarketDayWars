@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customers;
+use App\Models\Kelas;
+use App\Models\Notifikasi;
 use App\Models\Tenants;
 use App\Models\User;
 use GuzzleHttp\Promise\Create;
@@ -19,6 +21,16 @@ class ProfileController extends Controller
     public function edit(string $id)
     {
         $loggedUser = Auth::user()->id;
+        // Default Template for Notifikasi
+        $id = Auth::user()->id;
+        $notifikasi = Notifikasi::where('notif_uid', $id)
+        ->where('isOpened', 0)
+        ->latest() // Mengurutkan notifikasi berdasarkan waktu pembuatan terbaru
+        ->limit(3) // Membatasi hanya 3 notifikasi terbaru
+        ->get();
+
+        // Import Model from Kelas
+        $kelas = Kelas::all();
 
         if ($loggedUser == $id) {
             if (Auth::user()->role == 'customer') {
@@ -27,14 +39,14 @@ class ProfileController extends Controller
                 ->with('profilCustomer')
                 ->first();
 
-                return view('GeneralFeatures.Profile.index', compact( 'customer'));
+                return view('GeneralFeatures.Profile.index', compact( 'customer','notifikasi','id','kelas'));
             }else if (Auth::user()->role == 'tenant') {
                 $tenant = User::where('id', $id)
                 ->where('role', 'tenant')
                 ->with('profilTenant')
                 ->first();
 
-                return view('GeneralFeatures.Profile.index', compact('tenant'));
+                return view('GeneralFeatures.Profile.index', compact('tenant','notifikasi','id'));
             }
         }else {
             return redirect('403');
@@ -100,6 +112,9 @@ class ProfileController extends Controller
                 Customers::create( $profileCust );
             }
 
+            //Redirect to Menu
+            return redirect('dashboard');
+
         }else if (Auth::user()->role == 'tenant') {
             $tenant = User::find($id)
             ->where('role', 'tenant')
@@ -149,6 +164,9 @@ class ProfileController extends Controller
             }else {
                 Tenants::create( $profileTenant );
             }
+
+            //Redirect to Menu
+            return redirect('dashboard');
 
         }
     }
