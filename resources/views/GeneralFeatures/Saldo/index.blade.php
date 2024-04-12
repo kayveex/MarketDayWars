@@ -1,5 +1,5 @@
 {{-- Import Dashboard Template  --}}
-@extends('Partials.Dashboard.master', compact('notifikasi','id'))
+@extends('Partials.Dashboard.master', compact('notifikasi', 'id'))
 
 
 @section('breadcrumb')
@@ -59,9 +59,9 @@
                         </button>
                     </div>
                     <div class="p-4 overflow-y-auto">
-                      <p>Lorem ipsum dolor sit amet.</p>
+                        <p>Lorem ipsum dolor sit amet.</p>
                     </div>
-                    <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
+                    <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-700">
                     </div>
                 </div>
             </div>
@@ -70,9 +70,44 @@
         <div class="col-span-1 md:col-span-2 lg:col-span-2">
             <!-- Content for the right part -->
             <div class="bg-accdash rounded-md border-t-4 border-green-500 p-6 shadow-md shadow-black/5">
-                <div class="flex justify-between mb-6">
-                    <div>
-                        <div class="text-2xl font-semibold mb-1 text-green-500">Riwayat  Transaksi</div>
+                <div class="flex justify-between mb-6 flex-col">
+                    <div class="text-2xl font-semibold mb-1 text-green-500">Riwayat Topup Terakhir</div>
+                    <hr class="mt-2 mb-4 border-2 border-green-500">
+                    <!-- Table of Riwayat Transaksi -->
+                    <div class="flex flex-col">
+                        <div class="-m-1.5 overflow-x-auto">
+                            <div class="p-1.5 min-w-full inline-block align-middle">
+                                <div class="border rounded-lg overflow-hidden border-green-500">
+                                    <table class="min-w-full divide-y divide-green-500">
+                                        <thead class="bg-green-500 text-bgdash font-bold text-sm">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 text-start ">Tanggal</th>
+                                                <th scope="col" class="px-6 py-3 text-start ">Nominal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                            @forelse ($topupLimited as $key => $list)
+                                                <tr>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-400">
+                                                        {{ \Carbon\Carbon::parse($list->created_at)->format('d F Y') }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400 ">
+                                                        Rp {{ number_format($list->jumlah, 0, ',', '.') }}
+                                                    </td>                                                                                                    
+                                                </tr>    
+                                            @empty
+                                                <tr>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-500" colspan="2">
+                                                        Tidak ada riwayat Topup 🙏
+                                                    </td>
+                                                </tr>                                  
+                                            @endforelse
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cashflow;
 use App\Models\Customers;
 use App\Models\Notifikasi;
+use App\Models\Tenants;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,21 +14,28 @@ class SaldoSayaController extends Controller
 {
     // Saldo Display for all roles!
     public function index()  {
-        // For Notifications
-        $id = Auth::user()->id;
-        $notifikasi = Notifikasi::where('notif_uid', $id)
-            ->where('isOpened', 0)
-            ->latest() // Mengurutkan notifikasi berdasarkan waktu pembuatan terbaru
-            ->limit(3) // Membatasi hanya 3 notifikasi terbaru
-            ->get();
+        // For Notification
+        $data = app(TopbarController::class)->NotifCaller();
+        $id = $data['id'];
+        $notifikasi = $data['notifikasi'];
+
         if (Auth::user()->role == 'admin') {
             // Getting Data for cashflow_uid from User
             $custs = Customers::all();
-            return view('GeneralFeatures.Saldo.topup', compact('custs'));
+            $tents = Tenants::all();
+
+            //Taking Last 5 topUp Data for Admin
+            $topUpAllLimited = app(RiwayatController::class)->topUpAllLimited();
+
+            return view('GeneralFeatures.Saldo.topup', compact('custs', 'tents','topUpAllLimited'));
         }else {
             // Taking balance data for User
             $balance = Auth::user()->balance;
-            return view('GeneralFeatures.Saldo.index', compact( 'balance','notifikasi','id'));
+
+            // Taking last 5 topup data for User
+            $topupLimited = app(RiwayatController::class)->topUpLimited();
+            
+            return view('GeneralFeatures.Saldo.index', compact( 'balance','notifikasi','id','topupLimited'));
         }
     }
 

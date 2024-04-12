@@ -67,7 +67,8 @@
                             <div class="form-control">
                                 <h5 class="text-sm pb-2 text-green-500 font-semibold">Target Customer</h5>
                                 {{-- Advanced Search Feature --}}
-                                <select name="cashflow_uid" id="cashflow_uid" data-hs-select='{
+                                <select name="cashflow_uid" id="cashflow_uid"
+                                    data-hs-select='{
                                     "hasSearch": true,
                                     "searchPlaceholder": "Cari disini... 🔎",
                                     "searchClasses": "block w-full text-sm rounded-lg before:absolute before:inset-0 before:z-[1] bg-accdash border-green-500 text-green-500 focus:outline-none focus:ring-1 focus:border-green-500 focus:ring-green-500 py-2 px-3",
@@ -77,15 +78,23 @@
                                     "dropdownClasses": "mt-2 max-h-72 pb-1 px-1 space-y-0.5 z-20 w-full bg-accdash border border-green-500 rounded-lg overflow-hidden overflow-y-auto dark:bg-accdash dark:border-green-500",
                                     "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-green-700 rounded-lg focus:outline-none focus:bg-gray-100 bg-accdash dark:hover:bg-green-700 dark:text-gray-200 dark:focus:bg-slate-800",
                                     "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-gray-200\" data-title></div></div></div>"
-                                  }' class="hidden">
-                                  <option >Cari Disini.. 🔎</option>
-                                  @foreach ($custs as $cust)
-                                  <option value="{{ $cust->cust_uid }}" data-hs-select-option='{
+                                  }'
+                                    class="hidden">
+                                    <option>Cari Disini.. 🔎</option>
+                                    @foreach ($custs as $cust)
+                                        <option value="{{ $cust->cust_uid }}"
+                                            data-hs-select-option='{
                                       "icon": "<img class=\"inline-block size-4 rounded-full\" src=\"{{ asset($cust->custToUsers->foto) }}\" />"}'>
-                                      {{ $cust->nama_cust }}
-                                  </option>     
-                              @endforeach
-                              
+                                            {{ $cust->nama_cust }}
+                                        </option>
+                                    @endforeach
+                                    @foreach ($tents as $tent)
+                                        <option value="{{ $tent->tenant_uid }}"
+                                            data-hs-select-option='{
+                                            "icon": "<img class=\"inline-block size-4 rounded-full\" src=\"{{ asset($tent->tenantToUsers->foto) }}\" />"}'>
+                                            {{ $tent->nama_tenant }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -105,7 +114,52 @@
             <div class="bg-accdash rounded-md border-t-4 border-green-500 p-6 shadow-md shadow-black/5">
                 <div class="flex justify-between mb-6">
                     <div>
-                        <div class="text-2xl font-semibold mb-1 text-green-500">Riwayat Topup Saldo</div>
+                        <div class="text-2xl font-semibold mb-1 text-green-500">Riwayat Topup Terakhir</div>
+                    </div>
+                </div>
+                <hr class="mt-2 mb-4 border-2 border-green-500">
+                <!-- Table of Riwayat Transaksi -->
+                <div class="flex flex-col">
+                    <div class="-m-1.5 overflow-x-auto">
+                        <div class="p-1.5 min-w-full inline-block align-middle">
+                            <div class="border rounded-lg overflow-hidden border-green-500">
+                                <table class="min-w-full divide-y divide-green-500">
+                                    <thead class="bg-green-500 text-bgdash font-bold text-sm">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-start ">Tanggal</th>
+                                            <th scope="col" class="px-6 py-3 text-start ">Nominal</th>
+                                            <th scope="col" class="px-6 py-3 text-start ">User</th>
+                                            <th scope="col" class="px-6 py-3 text-start ">Role</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        @forelse ($topUpAllLimited as $key => $list)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-400">
+                                                    {{ \Carbon\Carbon::parse($list->created_at)->format('d F Y') }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400 ">
+                                                    Rp {{ number_format($list->jumlah, 0, ',', '.') }}
+                                                </td>                                                                                                    
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400 ">
+                                                    {{ $list->cashflowToUsers->username }}
+                                                </td>                                                                                                    
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">
+                                                    {{ ucfirst($list->cashflowToUsers->role) }}
+                                                </td>                                                                                                                                                   
+                                            </tr>    
+                                        @empty
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-500" colspan="2">
+                                                    Tidak ada riwayat Topup 🙏
+                                                </td>
+                                            </tr>                                  
+                                        @endforelse
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
